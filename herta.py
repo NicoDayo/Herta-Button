@@ -6,23 +6,22 @@ class KuruKuruKururin:
     def __init__(self, window):
         self.sound_files = ["sounds/Herta Kurukuru.wav", "sounds/Herta Kururin.wav"]
         self.current_sound_index = 0
-        self.animation_speed = 50
+        self.animation_speed = 150
         self.current_frame_index = 0
         self.button_frames = self.load_button_frames()
-
         try:
             herta_image = Image.open("herta.png").convert("RGBA")
             herta_image = herta_image.resize((200, 200))
             self.herta_photoimage = ImageTk.PhotoImage(herta_image)
-        except (FileNotFoundError, OSError) as e:
-            print("Error loading static image:", e)
+        except (FileNotFoundError, OSError) as err:
+            print("Error loading image", err)
             self.herta_photoimage = None
 
         image_label = tk.Label(window, image=self.herta_photoimage, bg="white")
         image_label.pack(pady=0)
 
         self.button = tk.Button(window, bd=0, bg="white", command=self.herta, image=self.button_frames[0] if self.button_frames else None, relief=tk.RAISED)
-        self.button.pack(pady=20)
+        self.button.pack(pady=10)
 
     def load_button_frames(self):
         button_frames = []
@@ -32,13 +31,13 @@ class KuruKuruKururin:
             while True:
                 try:
                     button_image.seek(frame_count)
-                    resized_image = button_image.resize((160, 160))
+                    resized_image = button_image.resize((170, 170))
                     button_frames.append(ImageTk.PhotoImage(resized_image))
                     frame_count += 1
                 except EOFError:
                     break
-        except (FileNotFoundError, OSError) as e:
-            print("Error loading button image:", e)
+        except (FileNotFoundError, OSError) as err:
+            print("Error loading button:", err)
         return button_frames
 
     def herta(self):
