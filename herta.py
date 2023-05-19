@@ -1,12 +1,12 @@
 import tkinter as tk
-from playsound import playsound
 from PIL import ImageTk, Image, ImageSequence
+import pygame
 
 class KuruKuruKururin:
     def __init__(self, window):
         self.sound_files = ["sounds/Herta Kurukuru.wav", "sounds/Herta Kururin.wav"]
         self.current_sound_index = 0
-        self.animation_speed = 150
+        self.animation_speed = 200
         self.current_frame_index = 0
         self.button_gif = self.load_button_gif()
         try:
@@ -41,8 +41,9 @@ class KuruKuruKururin:
         return None
 
     def herta(self):
+        pygame.mixer.init()
         sound_file = self.sound_files[self.current_sound_index]
-        playsound(sound_file)
+        pygame.mixer.Sound(sound_file).play()
         self.current_sound_index = (self.current_sound_index + 1) % len(self.sound_files)
 
         self.current_frame_index = 0
