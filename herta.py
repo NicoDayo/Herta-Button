@@ -9,6 +9,8 @@ class KuruKuruKururin:
         self.animation_speed = 200
         self.current_frame_index = 0
         self.button_gif = self.load_button_gif()
+        pygame.mixer.init()
+        self.sounds = [pygame.mixer.Sound(sf) for sf in self.sound_files]
         try:
             herta_image = Image.open("herta.png").convert("RGBA")
             herta_image = herta_image.resize((200, 200))
@@ -41,9 +43,7 @@ class KuruKuruKururin:
         return None
 
     def herta(self):
-        pygame.mixer.init()
-        sound_file = self.sound_files[self.current_sound_index]
-        pygame.mixer.Sound(sound_file).play()
+        self.sounds[self.current_sound_index].play()
         self.current_sound_index = (self.current_sound_index + 1) % len(self.sound_files)
 
         self.current_frame_index = 0
