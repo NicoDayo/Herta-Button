@@ -70,6 +70,7 @@ window = tk.Tk()
 window.title("KuruKuruKururin")
 window.geometry("200x400")
 window.configure(bg="white")
+window.resizable(False, False)
 
 app = KuruKuruKururin(window)
 
