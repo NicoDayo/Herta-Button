@@ -45,7 +45,6 @@ class KuruKuruKururin:
     def herta(self):
         self.sounds[self.current_sound_index].play()
         self.current_sound_index = (self.current_sound_index + 1) % len(self.sound_files)
-
         self.current_frame_index = 0
         self.update_animation()
 
